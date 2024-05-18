@@ -1,18 +1,24 @@
+import { Button, ChakraProvider } from '@chakra-ui/react';
 import styles from "./index.module.css";
+
+import Table from "../components/table";
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <h1 className={styles.title}>Dashboard Administrativo</h1>
+    <ChakraProvider>
+      <main className={styles.main}>
+        <h1 className={styles.title}>Dashboard Administrativo</h1>
 
-      <div className={styles.container}>
-        <div className={styles.toolsbar}>
-          <button>Adicionar funcionário</button>
-        </div>
+        <div className={styles.container}>
+          <div className={styles.toolsbar}>
+            <Button colorScheme='blue'>Adicionar funcionário</Button>
+          </div>
 
-        <div>
+          <div>
+            <Table></Table>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </ChakraProvider>
   );
 }

@@ -1,0 +1,20 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.headbar {
+  background-color: rgb(6, 44, 56);
+  color: white;
+  height: 25px;
+}
+
+.table_line {
+  background-color: rgb(222, 222, 222);
+  color: rgb(0, 0, 0);
+  height: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-align: center;
+}
