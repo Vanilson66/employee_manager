@@ -1,8 +1,25 @@
 .main {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6rem;
+  padding-top: 2rem;
   min-height: 100vh;
+}
+
+.title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.toolsbar {
+  padding: 0 6rem;
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: right;
+  align-items: center;
 }
