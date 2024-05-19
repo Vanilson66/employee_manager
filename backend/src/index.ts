@@ -4,7 +4,7 @@ import "dotenv/config";
 import express from "express";
 import http from "http";
 import mongoose from "mongoose";
-import { expressConfig, mongoConfig } from "./confg/express";
+import { expressConfig, mongoConfig } from "./config/express";
 
 const app = express()
 
