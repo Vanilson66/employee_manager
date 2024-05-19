@@ -1,5 +1,11 @@
 import express from "express"
-import { createEmployee, deleteEmployeeById, getEmployeeByName, getEmployees, updateEmployeeById } from "../schemas/employee"
+import {
+  createEmployee,
+  deleteEmployeeById,
+  getEmployeeByName,
+  getEmployees,
+  updateEmployeeById
+} from "../schemas/employee"
 
 export const getEmployeesController = async (req: express.Request, res: express.Response) => {
   try {

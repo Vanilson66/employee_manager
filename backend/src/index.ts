@@ -6,6 +6,8 @@ import http from "http";
 import mongoose from "mongoose";
 import { expressConfig, mongoConfig } from "./config/express";
 
+import routes from "./routes";
+
 const app = express()
 
 app.use(cors({
@@ -23,3 +25,5 @@ server.listen(expressConfig.port, () => {
 mongoose.Promise = Promise
 mongoose.connect(mongoConfig.url)
 mongoose.connection.on("error", (error: Error) => console.log(error))
+
+app.use("/", routes)
