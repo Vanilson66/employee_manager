@@ -20,14 +20,14 @@ export const createEmployee = (values: Record<string, any>) => new EmployeeModel
 
 export const updateEmployeeById = (_id: string, values: Record<string, any>) => {
   if (!mongoose.Types.ObjectId.isValid(_id)) {
-    throw new Error('Invalid ID');
+    return ('Invalid ID');
   }
   return EmployeeModel.findByIdAndUpdate(_id, values, { new: true }).then(employee => employee?.toObject());
 };
 
 export const deleteEmployeeById = (_id: string) => {
   if (!mongoose.Types.ObjectId.isValid(_id)) {
-    throw new Error('Invalid ID');
+    return ('Invalid ID');
   }
   return EmployeeModel.findByIdAndDelete(_id);
 };
