@@ -1,18 +1,33 @@
 import mongoose from "mongoose";
 
 const EmployeeSchema = new mongoose.Schema({
-  name: { type: String, require: true },
-  position: { type: String, require: true },
-  department: { type: String, require: true },
-  admissionDate: { type: String, require: true },
-})
+  name: { type: String, required: true },
+  position: { type: String, required: true },
+  department: { type: String, required: true },
+  admissionDate: { type: String, required: true }
+});
 
-export const EmployeeModel = mongoose.model('Employee', EmployeeSchema)
+export const EmployeeModel = mongoose.model('Employee', EmployeeSchema);
 
-// Metodos
-export const getEmployees = () => EmployeeModel.find()
-export const getEmployeeByName = (id: number) => EmployeeModel.findById(id)
+// Métodos
+export const getEmployees = () => EmployeeModel.find();
+
+export const getEmployeeByName = (name: string) => EmployeeModel.findOne({ name });
+
 export const createEmployee = (values: Record<string, any>) => new EmployeeModel(values)
-  .save().then(user => user.toObject())
-export const updateEmployeeById = (id: number, values: Record<string, any>) => EmployeeModel.findByIdAndUpdate(id, values)
-export const deleteEmployeeById = (id: number) => EmployeeModel.findByIdAndDelete(id)
+  .save()
+  .then(employee => employee.toObject());
+
+export const updateEmployeeById = (_id: string, values: Record<string, any>) => {
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
+    throw new Error('Invalid ID');
+  }
+  return EmployeeModel.findByIdAndUpdate(_id, values, { new: true }).then(employee => employee?.toObject());
+};
+
+export const deleteEmployeeById = (_id: string) => {
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
+    throw new Error('Invalid ID');
+  }
+  return EmployeeModel.findByIdAndDelete(_id);
+};

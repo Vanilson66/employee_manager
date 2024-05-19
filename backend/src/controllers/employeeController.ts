@@ -41,11 +41,11 @@ export const createEmployeeController = async (req: express.Request, res: expres
 
 export const updateEmployeeController = async (req: express.Request, res: express.Response) => {
   try {
-    const { id, name, position, department, admissionDate } = req.body
+    const { _id, name, position, department, admissionDate } = req.body
 
     if (!name || !position || !department || !admissionDate) res.sendStatus(400)
 
-    const employee = await updateEmployeeById(id,
+    const employee = await updateEmployeeById(_id,
       {
         name,
         position,
@@ -64,11 +64,11 @@ export const updateEmployeeController = async (req: express.Request, res: expres
 
 export const deleteEmployeeController = async (req: express.Request, res: express.Response) => {
   try {
-    const { id } = req.body
+    const { _id } = req.body
 
-    if (!id) res.sendStatus(400)
+    if (!_id) res.sendStatus(400)
 
-    await deleteEmployeeById(id)
+    await deleteEmployeeById(_id)
 
     return res.status(200).json({
       message: "Employeen deleted"

@@ -8,8 +8,8 @@ import {
 } from "../controllers/employeeController";
 
 export default (router: express.Router) => {
-  router.get("/getEmployees", getEmployeesController)
-  router.post("/createEmployee", createEmployeeController)
-  router.post("/updateEmployee", updateEmployeeController)
-  router.post("/deleteEmployee", deleteEmployeeController)
-}
+  router.get("/getEmployees", getEmployeesController);
+  router.post("/createEmployee", createEmployeeController);
+  router.post("/updateEmployee", updateEmployeeController);
+  router.post("/deleteEmployee", deleteEmployeeController);
+};
