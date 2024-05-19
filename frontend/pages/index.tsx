@@ -1,6 +1,7 @@
-import { Button, ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import styles from "./index.module.css";
 
+import Form from "../components/form";
 import Table from "../components/table";
 
 export default function Home() {
@@ -11,7 +12,7 @@ export default function Home() {
 
         <div className={styles.container}>
           <div className={styles.toolsbar}>
-            <Button colorScheme='blue'>Adicionar funcionário</Button>
+            <Form />
           </div>
 
           <div>
