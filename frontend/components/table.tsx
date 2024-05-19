@@ -1,9 +1,25 @@
-import { BiEdit } from 'react-icons/bi';
+import { useEffect, useState } from 'react';
+import api from "../helpers/api";
+
 import Delete from "./delete_modal";
+import Edit from "./edit_form";
 import styles from "./table.module.css";
 
 
 export default function Table() {
+  const [employees, setEmployees] = useState([])
+
+  useEffect(() => {
+    api.get("/getEmployees")
+      .then(({ data }) => {
+        setEmployees(data)
+        console.log(data);
+
+      }).catch(err =>
+        console.log(err)
+      )
+  }, [])
+
   return (
     <table className={styles.table}>
       <thead>
@@ -37,27 +53,27 @@ export default function Table() {
       </thead>
 
       <tbody>
-        <tr className={styles.table_line}>
-          <td>
-            <span>Vanilson</span>
-          </td>
-          <td>
-            <span>Full-Stack</span>
-          </td>
-          <td>
-            <span>tecnologia</span>
-          </td>
-          <td>
-            <span>18/05/2024</span>
-          </td>
-          <td>
-            <button>
-              <BiEdit className={styles.action_button} color='green' size={20} />
-            </button>
+        {employees.map(object => (
+          <tr className={styles.table_line}>
+            <td>
+              <span>{object.name}</span>
+            </td>
+            <td>
+              <span>{object.position}</span>
+            </td>
+            <td>
+              <span>{object.department}</span>
+            </td>
+            <td>
+              <span>{object.admissionDate}</span>
+            </td>
+            <td>
+              <Edit data={object} />
 
-            <Delete />
-          </td>
-        </tr>
+              <Delete _id={object._id} />
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
   )

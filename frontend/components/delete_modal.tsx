@@ -1,6 +1,8 @@
 import { Button, useDisclosure } from '@chakra-ui/react';
 import { useRef } from "react";
 import { BiTrashAlt } from 'react-icons/bi';
+import api from "../helpers/api";
+
 
 import {
   AlertDialog,
@@ -12,9 +14,16 @@ import {
 } from '@chakra-ui/react';
 
 
-export default function Delete_Modal() {
+export default function Delete_Modal({ _id }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = useRef()
+
+  const deleteEmployee = async () => {
+    await api.post("/deleteEmployee", {
+      _id
+    })
+    onClose()
+  }
 
   return (
     <>
@@ -44,7 +53,10 @@ export default function Delete_Modal() {
               <Button ref={cancelRef} onClick={onClose}>
                 Cancelar
               </Button>
-              <Button colorScheme='red' onClick={onClose} ml={3}>
+              <Button
+                colorScheme='red'
+                onClick={deleteEmployee}
+                ml={3}>
                 Apagar
               </Button>
             </AlertDialogFooter>

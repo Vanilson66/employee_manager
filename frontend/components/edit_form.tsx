@@ -1,5 +1,6 @@
 import { Button, Input, useDisclosure } from '@chakra-ui/react';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { BiEdit } from 'react-icons/bi';
 import api from "../helpers/api";
 import styles from "./form.module.css";
 
@@ -13,14 +14,18 @@ import {
   ModalOverlay,
 } from '@chakra-ui/react';
 
-export default function Form() {
+export default function Form({ data }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [formData, setFormData] = useState({});
 
+  useEffect(() => {
+    if (typeof data === "object") setFormData(data);
+  }, [data]);
+
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
     }));
   };
@@ -28,23 +33,26 @@ export default function Form() {
   const handleSubmit = async () => {
     if (Object.keys(formData).length === 0) console.log("erro");
 
-    await api.post("/createEmployee", formData);
+    await api.post("/updateEmployee", {
+      ...formData
+    });
     onClose();
   };
 
   return (
     <>
-      <Button
-        colorScheme='blue'
-        onClick={onOpen}
-      >
-        Adicionar funcionário
-      </Button>
+      <button onClick={onOpen}>
+        <BiEdit
+          className={styles.action_button}
+          color='green'
+          size={20}
+        />
+      </button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Adicionar funcionário</ModalHeader>
+          <ModalHeader>Editar funcionário</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <form className={styles.display} onSubmit={handleSubmit}>
@@ -53,6 +61,7 @@ export default function Form() {
                   onChange={handleChange}
                   placeholder='Nome completo'
                   name="name"
+                  value={formData.name || ""}
                 />
               </div>
               <div className={styles.input}>
@@ -60,6 +69,7 @@ export default function Form() {
                   onChange={handleChange}
                   placeholder='Cargo'
                   name="position"
+                  value={formData.position || ""}
                 />
               </div>
               <div className={styles.input}>
@@ -67,6 +77,7 @@ export default function Form() {
                   onChange={handleChange}
                   placeholder='Departamento'
                   name="department"
+                  value={formData.department || ""}
                 />
               </div>
               <div className={styles.input}>
@@ -76,6 +87,7 @@ export default function Form() {
                   size='md'
                   type='date'
                   onChange={handleChange}
+                  value={formData.admissionDate || ""}
                 />
               </div>
             </form>
@@ -91,7 +103,7 @@ export default function Form() {
                 onClose();
               }}
             >
-              Adicionar
+              Editar
             </Button>
           </ModalFooter>
         </ModalContent>
