@@ -13,8 +13,14 @@
 .table_line {
   background-color: rgb(222, 222, 222);
   color: rgb(0, 0, 0);
-  height: 20px;
   font-weight: 600;
   font-size: 0.9rem;
   text-align: center;
+  padding: 10px 0;
+}
+
+.action_button:hover {
+  background-color: rgba(0, 0, 0, 0.179);
+  border-radius: 10px;
+  padding: 2px;
 }

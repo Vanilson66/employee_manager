@@ -1,4 +1,7 @@
+import { BiEdit } from 'react-icons/bi';
+import Delete from "./delete_modal";
 import styles from "./table.module.css";
+
 
 export default function Table() {
   return (
@@ -12,12 +15,17 @@ export default function Table() {
           </th>
           <th>
             <span>
-              E-mail
+              Cargo
             </span>
           </th>
           <th>
             <span>
-              Salário
+              Departamento
+            </span>
+          </th>
+          <th>
+            <span>
+              Data de admissão
             </span>
           </th>
           <th>
@@ -34,18 +42,20 @@ export default function Table() {
             <span>Vanilson</span>
           </td>
           <td>
-            <span>vanilsonreact@gmail.com</span>
+            <span>Full-Stack</span>
           </td>
           <td>
-            <span>R$12.000</span>
+            <span>tecnologia</span>
+          </td>
+          <td>
+            <span>18/05/2024</span>
           </td>
           <td>
             <button>
-              editar
+              <BiEdit className={styles.action_button} color='green' size={20} />
             </button>
-            <button>
-              apagar
-            </button>
+
+            <Delete />
           </td>
         </tr>
       </tbody>
